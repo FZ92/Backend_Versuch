@@ -1,25 +1,44 @@
+import React, {Component} from 'react';
+import {Switch, Route, Link} from "react-router-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+import AddUser from "./components/add-user.component";
+import User from "./components/user.component";
+import UserList from "./components/user-list.component";
+
+class App extends React.Component {
+  render(){
+    return(
+    <div>
+      <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <a href="/User" className="navbar-brand">
+          User
         </a>
-      </header>
+        <div className="navbar-nav mr-auto">
+          <li className="nav-item">
+            <Link to={"/User"} className="nav-link">
+              User
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to={"/add"} className="nav-link">
+              Add
+            </Link>
+          </li>
+        </div>
+      </nav>
+
+      <div className="container mt-3">
+        <Switch>
+          <Route exact path={["/", "/User"]} component={UserList} />
+          <Route path="/User/:UserID" component={User} />
+        </Switch>
+      </div>
     </div>
-  );
+    )
+}
 }
 
 export default App;
